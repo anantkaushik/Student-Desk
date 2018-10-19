@@ -1,0 +1,121 @@
+{% extends 'layout.html' %}
+{% block title %}Dashboard - EP {% endblock %}
+
+{% block content %}
+    <header id="head" class="secondary"></header>
+    <div class="container text-center">
+        <h1 class="display-1">
+            <b>{{ user }}'s Dashboard</b>
+        </h1>
+        <hr>
+
+            <div class="row container">
+            <h3 class="text-danger">Register Your Event</h3>
+
+                {% block error %}{% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        {% for message in messages %}
+                          <b><h4 class="text-danger">{{ message | safe}}</h4></b>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}{% endblock %}
+                <form action="/dashboard" method="POST">
+                    <div class="form-group col-sm-6">
+                        <label for="roll">Enrollment Number
+                          <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" name="roll" class="form-control" required placeholder="University Enrollment Number">
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label for="eve_name">Event Title
+                          <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" name="eve_name" class="form-control" maxlength="20" required placeholder="E.g. Technothon (Max 20 characters)">
+                    </div>
+                    <div class="form-group col-sm-6">
+                      <label for="category">Category</label><span class="text-danger">*</span>
+                      <select class="form-control" name="category"  required>
+                        <option disabled selected>Select Category</option>
+                          <option>Cultural Fest</option>
+                        <option>Technical Fest</option>
+                        <option>Hackathon</option>
+                      </select>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label for="college">College
+                          <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" name="college" class="form-control" required placeholder="Hansraj College">
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label for="university">University
+                          <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" name="university" class="form-control" required placeholder="Delhi University">
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label for="eve_desc">Event Description
+                        </label>
+                        <textarea type="text" name="eve_desc" class="form-control" maxlength="500" placeholder="Event Description (500 characters)"></textarea>
+                    </div>
+
+                    <div class="form-group col-sm-6">
+                        <label for="prize">Prize(Rs.)
+                        </label>
+                        <input type="number" name="prize" class="form-control" min="0" required placeholder="50000">
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label for="phone">Contact Number (+91)
+                            <span class="text-danger">*</span>
+                        </label>
+                        <input type="number" id="phone" name="phone" class="form-control"  placeholder="9999955555" pattern="^\d{4}-\d{3}-\d{4}$" required>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label for="fac_name">Faculty Head Name
+                            <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" name="fac_name" class="form-control" required placeholder="Faculty Head Name">
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label for="fac_num">Faculty Contact Number (+91)
+                            <span class="text-danger">*</span>
+                        </label>
+                        <input type="number" id="fac_num" name="fac_num" class="form-control" required placeholder="9999955555" onblur="checkLength(this)">
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label for="website">website
+                            <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" name="website" class="form-control" required placeholder="eventwebsite.com">
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label for="datetime">Event Date & Time
+                            <span class="text-danger">*</span>
+                        </label>
+                        <input class="form-control" name="datetime" type="datetime-local" required value="2018-12-31T23:59:59">
+                    </div>
+                    <div class="form-group">
+                        <input class="btn btn-success" type="submit">
+                    </div>
+
+
+                </form>
+            </div>
+    <blockquote>
+        (<span class="text-danger">*</span>) Fields are compulsory to fill.
+    </blockquote>
+
+    </div>
+    <script type="text/javascript">
+    function checkLength(el) {
+      if (el.value.length != 10) {
+        alert("length must be exactly 10 characters")
+      }
+    }
+    function validator(){
+        if (el.value.length != 10) {
+        alert("length must be exactly 10 characters")
+      }
+    }
+    </script>
+{% endblock %}

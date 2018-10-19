@@ -1,0 +1,86 @@
+{% extends 'layout.html' %}
+{% block title %}Sign Up - EP{% endblock %}
+
+{% block content %}
+
+    <header id="head" class="secondary"></header>
+    <!-- container -->
+    <div class="container">
+    <ol class="breadcrumb">
+      <li>
+        <a href="/">Home</a>
+      </li>
+      <li class="active">Registration</li>
+    </ol>
+    <div class="row">
+      <!-- Article main content -->
+      <article class="col-xs-12 maincontent">
+        <header class="page-header">
+          <h1 class="page-title">Registration</h1>
+        </header>
+        <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <h3 class="thin text-center">Register a new account</h3>
+              <p class="text-center text-muted">Already Registered?
+                <a href="/signin">Login Here</a>
+              </p>
+              <hr>
+                 {% block error %}{% with messages = get_flashed_messages() %}
+                  {% if messages %}
+                    {% for message in messages %}
+                      <b><h4 class="text-danger">{{ message }}</h4></b>
+                    {% endfor %}
+                  {% endif %}
+                {% endwith %}
+                {% endblock %}
+              <form action="/signup" method="POST">
+                <div class="top-margin">
+                  <label>First Name
+                    <span class="text-danger">*</span>
+                  </label>
+                  <input type="text" name="fname" class="form-control" required> </div>
+                <div class="top-margin">
+                  <label>Last Name
+                    <span class="text-danger">*</span>
+                  </label>
+                  <input type="text" name="lname" required class="form-control"> </div>
+                <div class="top-margin">
+                  <label>Email Address
+                    <span class="text-danger">*</span>
+                  </label>
+                  <input type="email" name="email"class="form-control" required> </div>
+                <div class="row top-margin">
+                  <div class="col-sm-6">
+                    <label>Password
+                      <span class="text-danger">*</span>
+                    </label>
+                    <input type="password" name="password" class="form-control" required minlength="8"> </div>
+                  <div class="col-sm-6">
+                    <label>Confirm Password
+                      <span class="text-danger">*</span>
+                    </label>
+                    <input type="password" name="conf_pass" class="form-control" required minlength="8"> </div>
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-lg-8">
+                    <label class="checkbox">
+                      <input type="checkbox" required> I've read the
+                      <a href="#/page_terms">Terms and Conditions</a>
+                    </label>
+                  </div>
+                  <div class="col-lg-4 text-right">
+                    <button class="btn btn-action" type="submit">Register</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </article>
+      <!-- /Article -->
+    </div>
+    </div>
+    <!-- /container -->
+{% endblock %}

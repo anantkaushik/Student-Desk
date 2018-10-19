@@ -1,0 +1,36 @@
+{% extends 'layout.html' %}
+{% block title %} Events - EP {% endblock %}
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('.static',filename='css/event.css') }}">
+{% endblock %}
+{% block content %}
+    <header id="head" class="secondary"></header><br><br><br>
+
+{% for event in eve_data %}
+<div class="movie_card" id="ave">
+  <div class="info_section">
+    <div class="movie_header">
+      <img class="locandina" src="https://mr.comingsoon.it/imgdb/locandine/235x336/53715.jpg"/>
+      <h1>{{ event['event_name'] | safe}}</h1>
+      <h4>{{ event['college'] | safe}}</h4>
+      <span class="minutes">{{ event['category'] }}</span>
+      <p class="type">{{ event['date_time'] }}</p>
+    </div>
+    <div class="movie_desc">
+      <p class="text">
+        {{ event['description'] | safe}}
+      </p>
+    </div>
+    <!--div class="movie_social">
+      <ul>
+        <li><i class="material-icons">share</i></li>
+        <li><i class="material-icons"></i></li>
+        <li><i class="material-icons">chat_bubble</i></li>
+      </ul>
+    </div-->
+  </div>
+<div class="blur_back ave_back"></div>
+</div>
+{% endfor %}
+{% endblock %}
